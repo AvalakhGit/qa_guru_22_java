@@ -15,7 +15,7 @@ public class JsonFileParserTest {
     ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    public void jsonFileParse () throws Exception{
+    public void jsonFileParseTest() throws Exception{
 
         File file = new File ("src/test/resources/phones.json");
         List<MobilePhone> phoneList=mapper.readValue(file, new TypeReference<>() {});
