@@ -14,8 +14,7 @@ public class Note {
         return username;
     }
 
-    @Override
-    public String toString() {
+    public String noteToString() {
         return text;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.Properties;
 import java.sql.*;
 
-public class PostgresUserRepository implements UserRepository{
+public class DataBaseUserRepository implements UserRepository{
     static Properties properties=new Properties();
     @Override
     public Optional<User> findByUsername(String username) {
@@ -17,13 +17,13 @@ public class PostgresUserRepository implements UserRepository{
         try {
             String url = "jdbc:postgresql://192.168.50.101:32782/postgres";
             Connection conn = DriverManager.getConnection(url, properties);
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from users u where username ='"+username+"'");
+            PreparedStatement st = conn.prepareStatement("select * from public.users u where username ='"+username+"'");
+            ResultSet rs = st.executeQuery();
             if(rs.next()){
                 return Optional.of(
                         new User(
-                                rs.getString(2),
-                                rs.getString(3)
+                                rs.getString(1),
+                                rs.getString(2)
                         )
                 );
             } else {
